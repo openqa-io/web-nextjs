@@ -797,7 +797,21 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@types/node@^12.7.2":
+"@types/micro-cors@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@types/micro-cors/-/micro-cors-0.1.0.tgz#4ee6da45a80373230c6c4ceaba80fa05523db2e1"
+  integrity sha512-82Ug+VjbCLLN/cNbvRmIr49PA15HrRH+VcAUoDIZeMnWGQCJx2vmSYZy/S7DvqrmEoOZquwuxbs5w/8dfMSbcQ==
+  dependencies:
+    "@types/micro" "*"
+
+"@types/micro@*":
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/@types/micro/-/micro-7.3.3.tgz#31ead8df18ac10d58b7be1186d4b2d977b13a938"
+  integrity sha512-I3n3QYT7lqAxkyAoTZyg1yrvo38BxW/7ZafLAXZF/zZQOnAnQzg6j9XOuSmUEL5GGVFKWw4iqM+ZLnqb2154TA==
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*", "@types/node@^12.7.2":
   version "12.7.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
   integrity sha512-dyYO+f6ihZEtNPDcWNR1fkoTDf3zAK3lAABDze3mz6POyIercH0lEUawUFXlG8xaQZmm1yEBON/4TsYv/laDYg==
@@ -3378,6 +3392,11 @@ meow@^3.7.0:
     read-pkg-up "^1.0.1"
     redent "^1.0.0"
     trim-newlines "^1.0.0"
+
+micro-cors@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/micro-cors/-/micro-cors-0.1.1.tgz#af7a480182c114ffd1ada84ad9dffc52bb4f4054"
+  integrity sha512-6WqIahA5sbQR1Gjexp1VuWGFDKbZZleJb/gy1khNGk18a6iN1FdTcr3Q8twaxkV5H94RjxIBjirYbWCehpMBFw==
 
 microevent.ts@~0.1.1:
   version "0.1.1"
