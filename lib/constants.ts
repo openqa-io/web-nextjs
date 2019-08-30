@@ -6,9 +6,11 @@ const githubState = '39480398aldkjfnc8378djfienb123'
 const githubAuthUrl = encodeURI(`https://github.com/login/oauth/authorize?client_id=${githubClientId}&redirect_url=${githubRedirectUrl}&scope=${githubScope}&state=${githubState}`)
 
 const githubGetTokenUrl = 'https://github.com/login/oauth/access_token'
+const githubGetUserInfoUrl = 'https://api.github.com/user'
 
 export {
   githubClientId,
   githubAuthUrl,
-  githubGetTokenUrl
+  githubGetTokenUrl,
+  githubGetUserInfoUrl
 }

@@ -8,7 +8,8 @@ import fetch from 'isomorphic-unfetch'
 
 import {
   githubGetTokenUrl,
-  githubClientId
+  githubClientId,
+  githubGetUserInfoUrl
 } from '../../../lib/constants'
 
 const cors = Cors({
@@ -35,9 +36,19 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
     })
     const body = await r.json()
 
-    res.setHeader('Content-Type', 'application/json')
-    res.statusCode = 200
-    res.end(JSON.stringify(body))
+    const { access_token } = body
+    if (access_token) {
+      const r = await fetch(githubGetUserInfoUrl, {
+        headers: {
+          'Authorization': `token ${access_token}`
+        }
+      })
+      const body = await r.json()
+      res.setHeader('Authorization', `token ${}`)
+      res.statusCode = 200
+      res.end(JSON.stringify(body))
+    } else
+      throw "Github oauth error"
   } catch (e) {
     console.log(e)
     res.statusCode = 500
