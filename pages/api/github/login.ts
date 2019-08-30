@@ -59,7 +59,8 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
         throw 'Github oauth error'
       res.setHeader('Content-Type', 'application/json')
       res.setHeader('Set-Cookie', `oqa_uid=${uid}; oqa_token=${token}; Path=/`)
-      res.statusCode = 200
+      res.setHeader('Location', `/`)
+      res.statusCode = 307
       res.end(JSON.stringify(loginResult))
     } else
       throw "Github oauth error"
