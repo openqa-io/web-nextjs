@@ -44,7 +44,7 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       })
       const body = await r.json()
-      res.setHeader('Authorization', `token ${}`)
+      res.setHeader('Content-Type', 'application/json')
       res.statusCode = 200
       res.end(JSON.stringify(body))
     } else
