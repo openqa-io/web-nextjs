@@ -15,12 +15,12 @@ const cors = Cors({
   allowMethods: ['GET', 'HEAD', 'POST'],
 })
 
-const server = async (req: NextApiRequest, res: NextApiResponse) => {
+const server = (req: NextApiRequest, res: NextApiResponse) => {
   console.log(req.query)
   console.log(req.method)
   const { code } = req.query
 
-  const tokens = await fetch(githubGetTokenUrl, {
+  fetch(githubGetTokenUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,14 +31,15 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
       client_secret: process.env.github_secret,
       code
     })
+  }).then((r: Response) => {
+    console.log(r.json())
+    res.setHeader('Content-Type', 'application/json')
+    res.statusCode = 200
+    res.end(JSON.stringify(r.json()))
+  }).catch((e: any) => {
+    res.statusCode = 500
+    console.log(e)
   })
-
-  console.log("tokens is ", tokens)
-  console.log(tokens.json())
-
-  res.setHeader('Content-Type', 'application/json')
-  res.statusCode = 200
-  res.end(JSON.stringify({ status: 'ok' }))
 }
 
 export default cors(server)
