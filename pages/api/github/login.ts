@@ -15,31 +15,34 @@ const cors = Cors({
   allowMethods: ['GET', 'HEAD', 'POST'],
 })
 
-const server = (req: NextApiRequest, res: NextApiResponse) => {
+const server = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log(req.query)
   console.log(req.method)
   const { code } = req.query
 
-  fetch(githubGetTokenUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      client_id: githubClientId,
-      client_secret: process.env.github_secret,
-      code
+  try {
+    const r = await fetch(githubGetTokenUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        client_id: githubClientId,
+        client_secret: process.env.github_secret,
+        code
+      })
     })
-  }).then((r: Response) => {
-    console.log(r.json())
+    const body = await r.json()
+
     res.setHeader('Content-Type', 'application/json')
     res.statusCode = 200
-    res.end(JSON.stringify(r.json()))
-  }).catch((e: any) => {
-    res.statusCode = 500
+    res.end(JSON.stringify(body))
+  } catch (e) {
     console.log(e)
-  })
+    res.statusCode = 500
+    res.end("Internal server error")
+  }
 }
 
 export default cors(server)
