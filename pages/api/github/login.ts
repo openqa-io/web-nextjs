@@ -33,6 +33,7 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   })
 
+  console.log("tokens is ", tokens)
   console.log(tokens.json())
 
   res.setHeader('Content-Type', 'application/json')
