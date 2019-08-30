@@ -12,6 +12,8 @@ import {
   githubGetUserInfoUrl
 } from '../../../lib/constants'
 
+import { githubLogin } from '../../../lib/db'
+
 const cors = Cors({
   allowMethods: ['GET', 'HEAD', 'POST'],
 })
@@ -44,9 +46,17 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       })
       const body = await r.json()
+      const {
+        login,
+        avatar_uri,
+        email
+      } = body
+
+      const loginResult = githubLogin({ login, avatar_uri, email })
+
       res.setHeader('Content-Type', 'application/json')
       res.statusCode = 200
-      res.end(JSON.stringify(body))
+      res.end(JSON.stringify(loginResult))
     } else
       throw "Github oauth error"
   } catch (e) {
