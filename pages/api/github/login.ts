@@ -21,6 +21,7 @@ const cors = Cors({
 const server = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log(req.query)
   console.log(req.method)
+  console.log(req.cookies)
   const { code } = req.query
 
   try {
@@ -53,8 +54,12 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
       } = body
 
       const loginResult = await githubLogin({ login, avatar_uri, email })
-
+      const { uid, token } = loginResult
+      if (!uid || uid === '')
+        throw 'Github oauth error'
       res.setHeader('Content-Type', 'application/json')
+      res.setHeader('Set-Cookie', `opa_uid=${uid}; Path=/`)
+      res.setHeader('Set-Cookie', `opa_token=${token}; Path=/`)
       res.statusCode = 200
       res.end(JSON.stringify(loginResult))
     } else
