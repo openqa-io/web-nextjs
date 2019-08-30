@@ -52,7 +52,7 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
         email
       } = body
 
-      const loginResult = githubLogin({ login, avatar_uri, email })
+      const loginResult = await githubLogin({ login, avatar_uri, email })
 
       res.setHeader('Content-Type', 'application/json')
       res.statusCode = 200
