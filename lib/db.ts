@@ -64,4 +64,40 @@ const githubLogin = async (user: GithubUser) => {
 
 }
 
-export { githubLogin }
+const getGithubUserInfo = async (uid: String, token: String) => {
+
+  const client = await pool.connect()
+  try {
+
+    const query = {
+      text: 'select github_uid, github_user_avatar from users where uid = $1 And login_token = $2',
+      values: [uid, token]
+    }
+    const result = await client.query(query)
+
+    if (!result || result.rowCount === 0) { // a new user. create user...
+      return {
+        github_uid: '',
+        github_user_avatar: ''
+      }
+    } else {
+      const { github_uid, github_user_avatar } = result.rows[0]
+      return {
+        github_uid,
+        github_user_avatar
+      }
+    }
+
+  } catch (e) {
+    console.log(e)
+    return {
+      github_uid: '',
+      github_user_avatar: ''
+    }
+  } finally {
+    client.release()
+  }
+
+}
+
+export { githubLogin, getGithubUserInfo }
