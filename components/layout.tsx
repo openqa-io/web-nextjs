@@ -23,7 +23,7 @@ export default ({ children }: any) => {
   const [githubName, setGithubName] = useState<String | undefined>(Cookies.get(CookieNames.GithubId))
   const uid = Cookies.get(CookieNames.Uid)
   const token = Cookies.get(CookieNames.LoginToken)
-  console.log('githubName is ', githubName)
+  console.log('cookies are ', Cookies.get(), githubName, uid, token)
   return (
     <div>
       <Head>
