@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { githubAuthUrl } from '../lib/constants'
+
+import Cookies from 'js-cookie'
+
+import { githubAuthUrl, CookieNames } from '../lib/constants'
 import '../styles/styles.sass'
+
+import { useState } from 'react'
 
 export default ({ children }: any) => {
   /*
@@ -15,6 +20,10 @@ export default ({ children }: any) => {
     document.querySelector('#navbarmenu').classList.toggle('is-active')
   }
 
+  const [githubName, setGithubName] = useState<String | undefined>(Cookies.get(CookieNames.GithubId))
+  const uid = Cookies.get(CookieNames.Uid)
+  const token = Cookies.get(CookieNames.LoginToken)
+  console.log('githubName is ', githubName)
   return (
     <div>
       <Head>
@@ -47,10 +56,22 @@ export default ({ children }: any) => {
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <Link href={githubAuthUrl}>
-                      <a className="button is-white">Sign up</a>
-                    </Link>
-                    <a onClick={() => alert('You clicked the button!')} className="button is-info">Sign in</a>
+                    {
+                      !githubName ?
+                        <>
+                          <a href={githubAuthUrl} className="button is-white">Sign up</a>
+                          <a href={githubAuthUrl} className="button is-info">Sign In</a>
+                        </> :
+                        <>
+                          <a className="button is-white">{githubName}</a>
+                          <a onClick={() => {
+                            Cookies.remove(CookieNames.GithubId)
+                            Cookies.remove(CookieNames.Uid)
+                            Cookies.remove(CookieNames.LoginToken)
+                            setGithubName('')
+                          }} className="button is-primary">Sign Out</a>
+                        </>
+                    }
                   </div>
                 </div>
               </div>
