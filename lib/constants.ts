@@ -11,7 +11,8 @@ const githubGetUserInfoUrl = 'https://api.github.com/user'
 enum CookieNames {
   Uid = 'oqa_uid',
   GithubId = 'oqa_github_id',
-  LoginToken = 'oqa_token'
+  LoginToken = 'oqa_token',
+  OpenQA = 'openqa_io'
 }
 
 export {

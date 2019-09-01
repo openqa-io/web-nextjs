@@ -20,10 +20,12 @@ export default ({ children }: any) => {
     document.querySelector('#navbarmenu').classList.toggle('is-active')
   }
 
-  const [githubName, setGithubName] = useState<String | undefined>(Cookies.get(CookieNames.GithubId))
-  const uid = Cookies.get(CookieNames.Uid)
-  const token = Cookies.get(CookieNames.LoginToken)
-  console.log('cookies are ', Cookies.get(), githubName, uid, token)
+  const openQaCookie = Cookies.get(CookieNames.OpenQA)
+  const { uid, token, githubName: githubNameFromCookie } = openQaCookie ? JSON.parse(openQaCookie) : { uid: '', token: '', githubName: '' }
+  const [githubName, setGithubName] = useState<String | undefined>(githubNameFromCookie)
+
+  console.log('cookies are ', openQaCookie, githubName, uid, token)
+
   return (
     <div>
       <Head>

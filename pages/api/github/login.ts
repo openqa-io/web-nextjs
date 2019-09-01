@@ -58,10 +58,9 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
       const { uid, token } = loginResult
       if (!uid || uid === '')
         throw 'Github oauth error'
+
       res.setHeader('Content-Type', 'application/json')
-      res.setHeader('Set-Cookie', `${CookieNames.Uid}=${uid}; Path=/`)
-      res.setHeader('Set-Cookie', `${CookieNames.LoginToken}=${token}; Path=/`)
-      res.setHeader('Set-Cookie', `${CookieNames.Uid}=${login}; Path=/`)
+      res.setHeader('Set-Cookie', `${CookieNames.OpenQA}=${JSON.stringify({ uid, token, githubName: login })}; Path=/`)
       res.setHeader('Location', `/`)
       res.statusCode = 307
       res.end(JSON.stringify(loginResult))
