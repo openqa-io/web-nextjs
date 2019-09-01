@@ -9,9 +9,6 @@ const githubGetTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubGetUserInfoUrl = 'https://api.github.com/user'
 
 enum CookieNames {
-  Uid = 'oqa_uid',
-  GithubId = 'oqa_github_id',
-  LoginToken = 'oqa_token',
   OpenQA = 'openqa_io'
 }
 
