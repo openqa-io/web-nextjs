@@ -65,11 +65,11 @@ export default ({ children }: any) => {
                           <a href={githubAuthUrl} className="button is-info">Sign In</a>
                         </> :
                         <>
-                          <a className="button is-white">{githubName}</a>
-                          <a onClick={() => {
+                          <button className="button is-white">{githubName}</button>
+                          <button onClick={() => {
                             Cookies.remove(CookieNames.OpenQA)
                             setGithubName('')
-                          }} className="button is-primary">Sign Out</a>
+                          }} className="button is-primary">Sign Out</button>
                         </>
                     }
                   </div>
