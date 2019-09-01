@@ -67,9 +67,7 @@ export default ({ children }: any) => {
                         <>
                           <a className="button is-white">{githubName}</a>
                           <a onClick={() => {
-                            Cookies.remove(CookieNames.GithubId)
-                            Cookies.remove(CookieNames.Uid)
-                            Cookies.remove(CookieNames.LoginToken)
+                            Cookies.remove(CookieNames.OpenQA)
                             setGithubName('')
                           }} className="button is-primary">Sign Out</a>
                         </>
