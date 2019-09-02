@@ -8,7 +8,14 @@ import '../styles/styles.sass'
 
 import { useState } from 'react'
 
-export default ({ children }: any) => {
+import { connect } from "react-redux"
+
+import React from 'react'
+
+const Layout = (props: React.Props<any>) => {
+
+  const { children } = props
+  console.log(props)
   /*
    * Added this to toggle the is-active class. See:
    *
@@ -88,3 +95,5 @@ export default ({ children }: any) => {
     </div>
   )
 }
+
+export default connect(state => state)(Layout)

@@ -10,7 +10,7 @@ type TStore = Store & {
   runSagaTask?: () => void
 }
 
-export default (initialState = {}) => {
+export default (initialState = { "foo": { foo: "nice" } }) => {
   // Environment
   // const hasMaps =
   //   !isServer() &&
