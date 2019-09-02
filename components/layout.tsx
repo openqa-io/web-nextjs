@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { githubAuthUrl } from '../lib/constants'
+
+import Cookies from 'js-cookie'
+
+import { githubAuthUrl, CookieNames } from '../lib/constants'
 import '../styles/styles.sass'
+
+import { useState } from 'react'
 
 export default ({ children }: any) => {
   /*
@@ -14,6 +19,12 @@ export default ({ children }: any) => {
     document.querySelector('#burger').classList.toggle('is-active')
     document.querySelector('#navbarmenu').classList.toggle('is-active')
   }
+
+  const openQaCookie = Cookies.get(CookieNames.OpenQA)
+  const { uid, token, githubName: githubNameFromCookie } = openQaCookie ? JSON.parse(openQaCookie) : { uid: '', token: '', githubName: '' }
+  const [githubName, setGithubName] = useState<String | undefined>(githubNameFromCookie)
+
+  console.log('cookies are ', openQaCookie, githubName, uid, token)
 
   return (
     <div>
@@ -47,10 +58,20 @@ export default ({ children }: any) => {
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <Link href={githubAuthUrl}>
-                      <a className="button is-white">Sign up</a>
-                    </Link>
-                    <a onClick={() => alert('You clicked the button!')} className="button is-info">Sign in</a>
+                    {
+                      !githubName ?
+                        <>
+                          <a href={githubAuthUrl} className="button is-white">Sign up</a>
+                          <a href={githubAuthUrl} className="button is-info">Sign In</a>
+                        </> :
+                        <>
+                          <button className="button is-white">{githubName}</button>
+                          <button onClick={() => {
+                            Cookies.remove(CookieNames.OpenQA)
+                            setGithubName('')
+                          }} className="button is-primary">Sign Out</button>
+                        </>
+                    }
                   </div>
                 </div>
               </div>

@@ -9,7 +9,8 @@ import fetch from 'isomorphic-unfetch'
 import {
   githubGetTokenUrl,
   githubClientId,
-  githubGetUserInfoUrl
+  githubGetUserInfoUrl,
+  CookieNames
 } from '../../../lib/constants'
 
 import { githubLogin } from '../../../lib/db'
@@ -57,8 +58,9 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
       const { uid, token } = loginResult
       if (!uid || uid === '')
         throw 'Github oauth error'
+
       res.setHeader('Content-Type', 'application/json')
-      res.setHeader('Set-Cookie', `oqa_uid=${uid}; oqa_token=${token}; Path=/`)
+      res.setHeader('Set-Cookie', `${CookieNames.OpenQA}=${JSON.stringify({ uid, token, githubName: login })}; Path=/`)
       res.setHeader('Location', `/`)
       res.statusCode = 307
       res.end(JSON.stringify(loginResult))

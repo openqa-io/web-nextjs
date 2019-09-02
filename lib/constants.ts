@@ -8,9 +8,14 @@ const githubAuthUrl = encodeURI(`https://github.com/login/oauth/authorize?client
 const githubGetTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubGetUserInfoUrl = 'https://api.github.com/user'
 
+enum CookieNames {
+  OpenQA = 'openqa_io'
+}
+
 export {
   githubClientId,
   githubAuthUrl,
   githubGetTokenUrl,
-  githubGetUserInfoUrl
+  githubGetUserInfoUrl,
+  CookieNames
 }
