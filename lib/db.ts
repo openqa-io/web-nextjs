@@ -47,6 +47,8 @@ const githubLogin = async (user: GithubUser) => {
       uid = updateResult.rows[0].uid
 
     await client.query('COMMIT')
+
+    console.log('login done...', uid, token)
     return {
       uid,
       token
