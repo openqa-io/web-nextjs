@@ -11,8 +11,12 @@ import { useState } from 'react'
 import { connect } from "react-redux"
 
 import React from 'react'
+import { Dispatch } from 'redux'
+import * as actions from '../lib/actions/root.actions'
 
-const Layout = (props: React.Props<any>) => {
+const Layout = (props: React.Props<any> & {
+  dispatch: Dispatch
+}) => {
 
   const { children } = props
   console.log('props is ', props)
@@ -32,6 +36,13 @@ const Layout = (props: React.Props<any>) => {
   const [githubName, setGithubName] = useState<String | undefined>(githubNameFromCookie)
 
   console.log('cookies are ', openQaCookie, githubName, uid, token)
+
+  if (uid && token)
+    props.dispatch(actions.setUserInfo({
+      uid,
+      token,
+      githubName
+    }))
 
   return (
     <div>
