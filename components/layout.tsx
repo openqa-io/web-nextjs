@@ -15,7 +15,7 @@ import React from 'react'
 const Layout = (props: React.Props<any>) => {
 
   const { children } = props
-  console.log(props)
+  console.log('props is ', props)
   /*
    * Added this to toggle the is-active class. See:
    *
