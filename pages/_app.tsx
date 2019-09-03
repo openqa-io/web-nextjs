@@ -10,6 +10,7 @@ import { isServer } from '../lib/helpers/dom'
 import App, { AppContext } from 'next/app'
 
 import { NextPageContext } from 'next'
+import cookies from 'next-cookies'
 
 interface Props extends AppContext {
   ctx: NextPageContext & { store: Store }
@@ -20,8 +21,8 @@ class MyApp extends App<any, any> {
   static async getInitialProps({ Component, ctx }: Props) {
 
     // we can dispatch from here too
-    const cookies = ctx.req.headers.cookie
-    console.log('cookies are: ', cookies)
+    const oqaCookies = cookies(ctx)
+    console.log('cookies are: ', oqaCookies)
     /* if (isServer) {
      *   import('../lib/db').then(({ getGithubUserInfo }: any) => {
      *     ctx.store.dispatch({ type: 'FOO', payload: 'foo' })
