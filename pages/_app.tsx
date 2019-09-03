@@ -32,7 +32,7 @@ class MyApp extends App<any, any> {
         if (cookiesFromReq) {
           const loginInfo = JSON.parse(cookiesFromReq[CookieNames.OpenQA])
           const { uid, token } = loginInfo
-
+          console.log(loginInfo)
           if (uid && token) {
             const r = await fetch('http://localhost:3000/api/user/info', {
               method: 'POST',
@@ -49,6 +49,8 @@ class MyApp extends App<any, any> {
               github_uid,
               github_user_avatar
             } = await r.json()
+
+            console.log(github_uid, github_user_avatar)
 
             if (github_uid) {
               ctx.store.dispatch(actions.setUserInfo({
