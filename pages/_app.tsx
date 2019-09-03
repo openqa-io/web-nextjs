@@ -30,6 +30,7 @@ class MyApp extends App<any, any> {
       try {
         const cookiesFromReq = cookies(ctx)
         if (cookiesFromReq) {
+          console.log('cookies from req', cookiesFromReq)
           const loginInfo = JSON.parse(cookiesFromReq[CookieNames.OpenQA])
           const { uid, token } = loginInfo
           console.log(loginInfo)
