@@ -20,6 +20,7 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const userInfo = await getGithubUserInfo(uid, token)
 
+      console.log('user infor fetched is', userInfo)
       res.setHeader('Content-Type', 'application/json')
       res.statusCode = 200
       res.end(JSON.stringify(userInfo))
