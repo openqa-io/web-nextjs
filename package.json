@@ -13,6 +13,7 @@
     "@types/micro-cors": "^0.1.0",
     "@types/next-redux-wrapper": "^2.0.2",
     "@types/pg": "^7.11.0",
+    "@types/react-redux": "^7.1.2",
     "@types/uuid": "^3.4.5",
     "@zeit/next-sass": "^1.0.1",
     "bulma": "^0.7.5",
@@ -27,8 +28,11 @@
     "pg": "^7.12.1",
     "react": "^16.9.0",
     "react-dom": "16.9.0",
+    "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-saga": "^1.0.5",
+    "typescript-fsa": "^3.0.0-beta-2",
+    "typescript-fsa-reducers": "^1.2.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {

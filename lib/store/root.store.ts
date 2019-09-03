@@ -10,7 +10,7 @@ type TStore = Store & {
   runSagaTask?: () => void
 }
 
-export default (initialState = { "foo": { foo: "nice" } }) => {
+export default (initialState = {}) => {
   // Environment
   // const hasMaps =
   //   !isServer() &&
@@ -41,6 +41,7 @@ export default (initialState = { "foo": { foo: "nice" } }) => {
     composeEnhancers(applyMiddleware(...middleware))
   )
 
+  console.log('initial store is: ', store, store.getState())
   store.runSagaTask = () => {
     store.sagaTask = sagaMiddleware.run(rootSaga, store.dispatch)
   }

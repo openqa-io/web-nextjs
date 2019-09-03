@@ -1,14 +1,10 @@
 import { combineReducers } from 'redux'
+import userInfoReducer, { UserInfoReducer } from './userInfo.reducers'
 
-const reducer = (state = { foo: '' }, action: any) => {
-  switch (action.type) {
-    case 'FOO':
-      return { ...state, foo: action.payload }
-    default:
-      return state
-  }
+export interface RootReducers {
+  userInfo: UserInfoReducer
 }
 
 export default combineReducers({
-  foo: reducer
+  userInfoReducer
 })

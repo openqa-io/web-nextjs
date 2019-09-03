@@ -1,33 +1,47 @@
 import React from 'react'
-import App, { Container } from 'next/app'
 
 import withRedux from 'next-redux-wrapper'
 
 import createStore from '../lib/store/root.store'
 import { Provider } from "react-redux"
+import { Store } from 'redux'
 
-class MyApp extends App {
+import { isServer } from '../lib/helpers/dom'
+import App, { AppContext } from 'next/app'
 
-  static async getInitialProps({ Component, ctx }) {
+import { NextPageContext } from 'next'
+
+interface Props extends AppContext {
+  ctx: NextPageContext & { store: Store }
+}
+
+class MyApp extends App<any, any> {
+
+  static async getInitialProps({ Component, ctx }: Props) {
 
     // we can dispatch from here too
-    ctx.store.dispatch({ type: 'FOO', payload: 'foo' });
+    const cookies = ctx.req.headers.cookie
+    console.log('cookies are: ', cookies)
+    /* if (isServer) {
+     *   import('../lib/db').then(({ getGithubUserInfo }: any) => {
+     *     ctx.store.dispatch({ type: 'FOO', payload: 'foo' })
+     *   })
 
-    const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+     * }
+     */
+    const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
 
-    return { pageProps };
+    return { pageProps }
 
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps, store } = this.props
     return (
-      <Container>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-      </Container>
-    );
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    )
   }
 
 }
