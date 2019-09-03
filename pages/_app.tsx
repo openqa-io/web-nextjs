@@ -14,6 +14,7 @@ import { NextPageContext } from 'next'
 import cookies from 'next-cookies'
 
 import * as actions from '../lib/actions/root.actions'
+import fetch from 'isomorphic-unfetch'
 
 interface Props extends AppContext {
   ctx: NextPageContext & { store: Store }
@@ -33,11 +34,21 @@ class MyApp extends App<any, any> {
           const { uid, token } = loginInfo
 
           if (uid && token) {
-            const { getGithubUserInfo } = require('../lib/db') as any
+            const r = await fetch('http://localhost:3000/api/user/info', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                uid,
+                token
+              })
+            })
             const {
               github_uid,
               github_user_avatar
-            } = getGithubUserInfo(uid, token)
+            } = await r.json()
 
             if (github_uid) {
               ctx.store.dispatch(actions.setUserInfo({
