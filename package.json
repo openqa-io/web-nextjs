@@ -40,5 +40,9 @@
     "@types/node": "^12.7.2",
     "@types/react": "^16.9.2",
     "typescript": "^3.6.2"
+  },
+  "node": {
+    "net": "empty",
+    "dns": "empty"
   }
 }
