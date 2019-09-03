@@ -15,7 +15,7 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     console.log('user infor request body is: ', req.body)
-    const { uid, token } = JSON.parse(req.body)
+    const { uid, token } = req.body
 
     if (uid && token) {
 
