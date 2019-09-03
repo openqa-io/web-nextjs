@@ -33,7 +33,7 @@ class MyApp extends App<any, any> {
           const { uid, token } = loginInfo
 
           if (uid && token) {
-            const { getGithubUserInfo } = await import('../lib/db') as any
+            const { getGithubUserInfo } = require('../lib/db') as any
             const {
               github_uid,
               github_user_avatar
