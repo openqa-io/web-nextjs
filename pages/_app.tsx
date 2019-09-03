@@ -46,6 +46,7 @@ class MyApp extends App<any, any> {
                 token
               })
             })
+            console.log('get user info status:', r.status)
             const {
               github_uid,
               github_user_avatar
