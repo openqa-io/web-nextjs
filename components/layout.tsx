@@ -12,7 +12,6 @@ import { connect } from "react-redux"
 
 import React from 'react'
 import { Dispatch } from 'redux'
-import * as actions from '../lib/actions/root.actions'
 
 const Layout = (props: React.Props<any> & {
   dispatch: Dispatch
@@ -31,18 +30,7 @@ const Layout = (props: React.Props<any> & {
     document.querySelector('#navbarmenu').classList.toggle('is-active')
   }
 
-  const openQaCookie = Cookies.get(CookieNames.OpenQA)
-  const { uid, token, githubName: githubNameFromCookie } = openQaCookie ? JSON.parse(openQaCookie) : { uid: '', token: '', githubName: '' }
-  const [githubName, setGithubName] = useState<String | undefined>(githubNameFromCookie)
-
-  console.log('cookies are ', openQaCookie, githubName, uid, token)
-
-  if (uid && token)
-    props.dispatch(actions.setUserInfo({
-      uid,
-      token,
-      githubName
-    }))
+  const [githubName, setGithubName] = useState<String | undefined>('')
 
   return (
     <div>
